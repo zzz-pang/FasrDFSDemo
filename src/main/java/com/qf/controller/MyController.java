@@ -1,6 +1,8 @@
 package com.qf.controller;
 
 
+import com.qf.pojo.HouseInfo;
+import com.qf.service.HouseInfoService;
 import com.qf.util.FastDFSUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,12 +10,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class MyController {
+
+
+    @Resource
+    private HouseInfoService houseInfoService;
 
     @RequestMapping("/upload.json")
     @ResponseBody
@@ -80,4 +87,21 @@ public class MyController {
         map.put("msg", "file");
         return map;
     }
+    @RequestMapping("/addHouseInfo.json")
+    @ResponseBody
+    public    Map<String,Object>  save(HouseInfo info){
+        Map<String,Object> map = new HashMap<>();
+
+        boolean f =  houseInfoService.add(info);
+        if (f){
+            map.put("status","200");
+            map.put("msg","success");
+        }else{
+            map.put("msg","fail");
+            map.put("status","500");
+        }
+
+        return map;
+    }
+
 }

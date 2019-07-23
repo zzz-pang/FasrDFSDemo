@@ -10,7 +10,7 @@
     <!--
         1,加载properties文件
     -->
-    <context:property-placeholder location="classpath:*.properties"></context:property-placeholder>
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
 
     <!--
       2,dataSource
